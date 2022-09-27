@@ -1,17 +1,20 @@
+import java.util.Random;
+
 public class BankAccount {
     private double checkingBalance;
     private double savingsBalance;
-    // private String accountNumber;
+    private String accountNumber;
     private static int numOfAccounts = 0;
     private static double totalAmount = 0;
 
 
     // constructor
     public BankAccount(double checkingParam, double savingsParam) {
-        checkingBalance = checkingParam;
-        savingsBalance = savingsParam;
+        this.checkingBalance = checkingParam;
+        this.savingsBalance = savingsParam;
+        this.accountNumber = generateAccountNumber();
         numOfAccounts += 2;
-        totalAmount = checkingBalance + savingsBalance;
+        this.totalAmount = checkingBalance + savingsBalance;
     }
 
 
@@ -62,6 +65,27 @@ public class BankAccount {
     }
     public String getSavingsBalance() {
         return "Your savings balance is: " + this.savingsBalance;
+    }
+
+
+    // Ninja bonuses
+    public String getRandomNumber() {
+        Random randomNumber = new Random();
+        String nums = "1234567890";
+        String[] number = new String[10];
+
+        for(int i = 0; i < 10; i++) {
+            number[i] = String.valueOf(nums.charAt(i));
+        }
+        return number[randomNumber.nextInt(10)];
+    }
+    private String generateAccountNumber() {
+        String privateAccountNumber = "";
+
+        for(int i=0; i < 10; i++) {
+            privateAccountNumber += getRandomNumber();
+        }
+        return privateAccountNumber;
     }
 
 }
